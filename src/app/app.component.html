@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col col-lg-6">
+      <div class="text-center">
+        <h1 [hidden]="isCross" class="uppercase text-danger">
+          {{ playerOne }}
+        </h1>
+        <h1 [hidden]="!isCross" class="uppercase text-danger">
+          {{ playerTwo }}
+        </h1>
+      </div>
+
+      <div class="grid">
+        <div *ngFor="let item of itemArray; index as i">
+          <div class="card">
+            <div class="card-box box" (click)="handleClick(i)">
+              <app-icon [iconName]="item"></app-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-lg-6 text-center">
+      <div *ngIf="!isStarted">
+        <div *ngIf="!winMessage">
+          <div class="row justify-content-center align-items-center">
+            <div class="col col-lg-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  placeholder="Enter Name of Player 1"
+                  class="form-control"
+                  #player1
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  placeholder="Enter Name of Player 2"
+                  class="form-control"
+                  #player2
+                />
+              </div>
+              <div class="form-group">
+                <button
+                  (click)="startGame(player1, player2)"
+                  class="btn btn-primary pl-5 pr-5 form-control"
+                >
+                  Start
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isStarted">
+        <div *ngIf="!winMessage"><h1 class="text-white">Game Started</h1></div>
+        <div *ngIf="winMessage">
+          <h1 class="text-uppercase">{{ winMessage }}</h1>
+          <button (click)="reloadGame()" class="btn btn-danger pl-5 pr-5">
+            Reload Game
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
